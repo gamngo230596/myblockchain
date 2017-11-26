@@ -21,10 +21,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', index);
-app.use('/users', users);
-app.use('/api/admin',admins);
 app.use(function(req, res, next) {
     var allowedOrigins = ['http://localhost:3000'];
     var origin = req.headers.origin;
@@ -38,6 +34,10 @@ app.use(function(req, res, next) {
 
     return next();
 });
+app.use('/', index);
+app.use('/users', users);
+app.use('/api/admin',admins);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
