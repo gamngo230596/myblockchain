@@ -100,7 +100,7 @@ router.put('/:id', function(req, res, next) {
             // Get the documents collection
             var myobj = { "_id": new ObjectId(""+req.params.id)};
 
-            var newobj={"email":req.body.emailedit,"password":req.body.passwordedit};
+            var newobj={"money":req.body.newmoney};
             db.collection("wallet").updateOne(myobj, newobj, function(err, result) {
                 if (err) res.send(err);
                 else
