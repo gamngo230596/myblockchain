@@ -45,7 +45,7 @@ router.post('/', function(req, res,next) {
         else
         {
             console.log('Connection established to', url);
-            var myobj = { "email": req.body.email,"password":req.body.password,"money":1000};
+            var myobj = { "email": req.body.email,"password":req.body.password,"money":1000,"HistoryEx":[]};
             db.collection("wallet").insertOne(myobj, function(err, result) {
                 if (err)
                     res.send(err);
@@ -100,7 +100,7 @@ router.put('/:id', function(req, res, next) {
             // Get the documents collection
             var myobj = { "_id": new ObjectId(""+req.params.id)};
 
-            var newobj={$set:{"money":req.body.newmoney}};
+            var newobj={$set:{"money":req.body.newmoney},$set:{"HistoryEx":[{IDgui:'avc'}]}};
             db.collection("wallet").updateOne(myobj, newobj, function(err, result) {
                 if (err) res.send(err);
                 else
