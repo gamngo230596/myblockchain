@@ -100,8 +100,15 @@ router.put('/:id', function(req, res, next) {
             // Get the documents collection
             var myobj = { "_id": new ObjectId(""+req.params.id)};
 
-            var newobj={$set:{"money":req.body.newmoney,"HistoryEx":[{IDgui:'avc'}]}};
+            var newobj={$set:{"money":req.body.newmoney}};
             db.collection("wallet").updateOne(myobj, newobj, function(err, result) {
+                if (err) res.send(err);
+                else
+                    res.send("1 document updated");
+                db.close();
+            });
+			var newobj={$set:{"HistoryEx":[{IDgui:'avc'}]}};
+			db.collection("wallet").updateOne(myobj, newobj, function(err, result) {
                 if (err) res.send(err);
                 else
                     res.send("1 document updated");
